@@ -14,7 +14,6 @@ configparser==5.0.1
 crayons==0.4.0
 cycler==0.10.0
 cymem==2.0.5
-dataclasses==0.8
 decorator==4.4.2
 fastapi==0.65.1
 filelock==3.0.12
