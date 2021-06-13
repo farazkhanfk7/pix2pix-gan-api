@@ -1,5 +1,7 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
+
 from pydantic import BaseModel
 from typing import Optional
 from helpers import generate_image
@@ -11,6 +13,14 @@ import os
 import shutil
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get('/{name}')
 def index(name):
@@ -37,7 +47,6 @@ async def create_upload_file(file: UploadFile = File(...)):
     output_file_name = generate_image(input_file_path)
     output_file_path = f"images/output/{output_file_name}"
     return FileResponse(output_file_path)
-
 
 
 if __name__=="__main__":
